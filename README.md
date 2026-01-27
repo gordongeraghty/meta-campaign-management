@@ -1,19 +1,19 @@
 # Meta Campaign Management Automation
 
-Automation tools for Meta (Facebook/Instagram) campaign management, budget control, and optimization using the Facebook Business SDK.
+Automation tools for Meta (Facebook/Instagram) campaign management, budget control, and optimisation using the Facebook Business SDK.
 
-## 🎯 Features
+## Features
 
 - **Campaign CRUD Operations** - Create, read, update, delete campaigns programmatically
 - **Budget Management** - Automated budget pacing and allocation based on performance
-- **Performance Analysis** - Real-time campaign performance retrieval with insights
+- **Performance analysis** - Real-time campaign performance retrieval with insights
 - **Batch Operations** - Efficient bulk updates across multiple accounts
 - **Error Handling** - Robust error handling and rate limit management
 - **CLI Interface** - Simple command-line tools for common operations
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### Required
 
@@ -26,16 +26,16 @@ Automation tools for Meta (Facebook/Instagram) campaign management, budget contr
 ### Get Your Credentials
 
 1. **Access Token**:
-   - Go to [Meta Apps Dashboard](https://developers.facebook.com/apps/)
-   - Create or select your app
-   - Create a System User with Admin role
-   - Generate a permanent token with `ads_read,ads_management` scopes
-   - **Important**: System User tokens don't expire (user tokens expire after 60 days)
+ - Go to [Meta Apps Dashboard](https://developers.facebook.com/apps/)
+ - Create or select your app
+ - Create a System User with Admin role
+ - Generate a permanent token with `ads_read,ads_management` scopes
+ - **Important**: System User tokens don't expire (user tokens expire after 60 days)
 
 2. **Business Account ID**:
-   - Go to [Meta Ads Manager](https://adsmanager.facebook.com/)
-   - Settings → Business Settings
-   - Find your Account ID (format: `ACT_...`)
+ - Go to [Meta Ads Manager](https://adsmanager.facebook.com/)
+ - Settings → Business Settings
+ - Find your Account ID (format: `ACT_...`)
 
 ### API Permissions Required
 
@@ -44,7 +44,7 @@ Automation tools for Meta (Facebook/Instagram) campaign management, budget contr
 
 ---
 
-## 🚀 Setup Steps
+## Setup Steps
 
 ### 1. Clone the Repository
 
@@ -57,7 +57,7 @@ cd meta-campaign-management
 
 ```bash
 python3.11 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate # On Windows: venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
@@ -91,7 +91,7 @@ You should see a list of all campaigns with their IDs and budgets.
 
 ---
 
-## 📖 Per-Script Usage Examples
+## Per-Script Usage Examples
 
 ### Script 1: `list_campaigns.py` - List All Campaigns
 
@@ -162,24 +162,24 @@ python scripts/create_campaign.py --account-id ACT_1234567890 --config campaigns
 
 ```json
 [
-  {
-    "name": "Q1_Brand_Awareness",
-    "objective": "REACH",
-    "daily_budget": 50.00,
-    "status": "PAUSED"
-  },
-  {
-    "name": "Q1_Conversions_Mobile",
-    "objective": "CONVERSIONS",
-    "daily_budget": 75.00,
-    "status": "ACTIVE"
-  },
-  {
-    "name": "Retargeting_Website_Visitors",
-    "objective": "CONVERSIONS",
-    "daily_budget": 30.00,
-    "status": "PAUSED"
-  }
+ {
+ "name": "Q1_Brand_Awareness",
+ "objective": "REACH",
+ "daily_budget": 50.00,
+ "status": "PAUSED"
+ },
+ {
+ "name": "Q1_Conversions_Mobile",
+ "objective": "CONVERSIONS",
+ "daily_budget": 75.00,
+ "status": "ACTIVE"
+ },
+ {
+ "name": "Retargeting_Website_Visitors",
+ "objective": "CONVERSIONS",
+ "daily_budget": 30.00,
+ "status": "PAUSED"
+ }
 ]
 ```
 
@@ -214,9 +214,9 @@ python scripts/create_campaign.py --account-id ACT_1234567890 --config campaigns
 **Expected Output**:
 
 ```
-✓ Created campaign 1: Q1_Brand_Awareness (ID: 123456789012347)
-✓ Created campaign 2: Q1_Conversions_Mobile (ID: 123456789012348)
-✓ Created campaign 3: Retargeting_Website_Visitors (ID: 123456789012349)
+- Created campaign 1: Q1_Brand_Awareness (ID: 123456789012347)
+- Created campaign 2: Q1_Conversions_Mobile (ID: 123456789012348)
+- Created campaign 3: Retargeting_Website_Visitors (ID: 123456789012349)
 
 ================================================================================
 Summary: 3 created, 0 failed
@@ -239,9 +239,9 @@ python scripts/update_budget.py --account-id ACT_1234567890 --adjustment 10 --lo
 
 - `--account-id` (required): Your Meta Business Account ID
 - `--adjustment` (optional): Budget adjustment percentage (default: 10)
-  - Positive values increase budget
-  - Negative values decrease budget
-- `--lookback` (optional): Days of performance data to analyze (default: 7)
+ - Positive values increase budget
+ - Negative values decrease budget
+- `--lookback` (optional): Days of performance data to analyse (default: 7)
 
 **Example Commands**:
 
@@ -263,21 +263,21 @@ Analyzing 5 campaigns (lookback: 7 days)
 
 ================================================================================
 Campaign: Q1_Brand_Awareness_Campaign (ID: 123456789012345)
-  Current Budget: $50.00
-  Spend (last 7d): $320.45
-  Conversions: 8
-  CPA: $40.06
-  ✓ Updated budget: $55.00 (+10%)
+ Current Budget: $50.00
+ Spend (last 7d): $320.45
+ Conversions: 8
+ CPA: $40.06
+- Updated budget: $55.00 (+10%)
 --------------------------------------------------------------------------------
 Campaign: Q1_Conversions_Mobile (ID: 123456789012346)
-  Current Budget: $75.00
-  Spend (last 7d): $510.20
-  Conversions: 15
-  CPA: $34.01
-  ✓ Updated budget: $82.50 (+10%)
+ Current Budget: $75.00
+ Spend (last 7d): $510.20
+ Conversions: 15
+ CPA: $34.01
+- Updated budget: $82.50 (+10%)
 --------------------------------------------------------------------------------
 Campaign: Retargeting_Website_Visitors (ID: 123456789012349)
-  No spend data (skipped)
+ No spend data (skipped)
 --------------------------------------------------------------------------------
 
 Summary: 2 campaigns updated, 0 errors
@@ -293,7 +293,7 @@ Summary: 2 campaigns updated, 0 errors
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -305,7 +305,7 @@ FACEBOOK_ACCESS_TOKEN=your_system_user_token
 FACEBOOK_BUSINESS_ACCOUNT_ID=ACT_1234567890
 
 # Optional
-LOG_LEVEL=INFO  # DEBUG, INFO, WARNING, ERROR
+LOG_LEVEL=INFO # DEBUG, INFO, WARNING, ERROR
 ```
 
 ### .env.example Template
@@ -325,33 +325,33 @@ LOG_LEVEL=INFO
 
 ---
 
-## 🔐 Security Best Practices
+## Security Best Practices
 
 1. **Never commit `.env`** - Keep credentials out of version control
-   ```bash
-   # Add to .gitignore
-   .env
-   .env.local
-   *.key
-   ```
+ ```bash
+# Add to .gitignore
+ .env
+ .env.local
+ *.key
+ ```
 
 2. **Use System Users** - Generate permanent tokens via Meta Business Manager
-   - System User tokens don't expire
-   - User Access Tokens expire after 60 days
+ - System User tokens don't expire
+ - User Access Tokens expire after 60 days
 
 3. **Rotate Credentials Regularly** - Regenerate tokens every 90 days
 
 4. **Limit Permissions** - Use minimal scope required
-   - Use `ads_read` for read-only operations
-   - Use `ads_management` only when needed
+ - Use `ads_read` for read-only operations
+ - Use `ads_management` only when needed
 
 5. **Implement Approval Chains** - Require review for large budget changes
 
 6. **Add Budget Caps** - Prevent automation errors from costing money
-   ```python
-   MAX_DAILY_BUDGET = 1000  # $1000 cap per campaign
-   MAX_ADJUSTMENT_PERCENT = 50  # Max 50% increase
-   ```
+ ```python
+ MAX_DAILY_BUDGET = 1000 # $1000 cap per campaign
+ MAX_ADJUSTMENT_PERCENT = 50 # Max 50% increase
+ ```
 
 ---
 
@@ -410,7 +410,7 @@ python scripts/list_campaigns.py --account-id ACT_1234567890
 
 ---
 
-## 📚 Links to Official Documentation
+## Links to Official Documentation
 
 - **[Facebook Business SDK Documentation](https://developers.facebook.com/docs/business-sdk)** - Comprehensive SDK guide
 - **[Marketing API Reference](https://developers.facebook.com/docs/marketing-api)** - Full API documentation
@@ -421,7 +421,7 @@ python scripts/list_campaigns.py --account-id ACT_1234567890
 
 ---
 
-## 🔗 Related Repositories
+## Related Repositories
 
 - **[meta-creative-ai-generation](https://github.com/gordongeraghty/meta-creative-ai-generation)** - AI creative generation and bulk ad creation
 - **[meta-competitor-intelligence](https://github.com/gordongeraghty/meta-competitor-intelligence)** - Competitor monitoring and creative analysis
@@ -431,7 +431,7 @@ python scripts/list_campaigns.py --account-id ACT_1234567890
 
 ---
 
-## 🤖 Integration Examples
+## Integration Examples
 
 ### n8n Workflow
 
@@ -454,17 +454,17 @@ Log campaign data to Google Sheets via Zapier:
 
 ---
 
-## 📝 License
+## licence
 
-MIT License - See LICENSE file
+MIT licence - See licence file
 
-## 👥 Author
+## Author
 
 Gordon Geraghty - Head of Performance Media, Empire Amplify
 
 ---
 
-## 💬 Support
+## Support
 
 For issues or questions:
 1. Check [Troubleshooting](#troubleshooting) section
