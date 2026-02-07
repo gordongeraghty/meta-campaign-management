@@ -10,7 +10,7 @@ Example campaigns.json:
       {
         "name": "Q1_Brand_Awareness",
         "objective": "REACH",
-        "daily_budget": 5000,
+        "daily_budget": 50.00,
         "status": "PAUSED"
       }
     ]
@@ -23,6 +23,7 @@ import sys
 import time
 from dotenv import load_dotenv
 from facebook_business.api import FacebookAdsApi
+from facebook_business.adobjects.adaccount import AdAccount
 from facebook_business.adobjects.campaign import Campaign
 
 load_dotenv()
@@ -30,7 +31,7 @@ load_dotenv()
 def create_campaigns(account_id, config_file):
     """
     Create campaigns from JSON configuration file.
-    
+
     Args:
         account_id (str): Meta Business Account ID
         config_file (str): Path to JSON config file with campaign definitions
@@ -39,25 +40,33 @@ def create_campaigns(account_id, config_file):
         access_token = os.getenv('FACEBOOK_ACCESS_TOKEN')
         if not access_token:
             raise ValueError('FACEBOOK_ACCESS_TOKEN not found in .env')
-        
+
         with open(config_file, 'r') as f:
             campaigns_config = json.load(f)
-        
+
         if not isinstance(campaigns_config, list):
             raise ValueError('config_file must contain a JSON array of campaign objects')
-        
+
         FacebookAdsApi.init(access_token=access_token)
-        
+
+        # Normalize account ID to lowercase act_ prefix
+        if not account_id.lower().startswith('act_'):
+            account_id = f'act_{account_id}'
+        elif account_id.startswith('ACT_'):
+            account_id = f'act_{account_id[4:]}'
+
+        account = AdAccount(account_id)
+
         created_campaigns = []
         errors = []
-        
+
         for idx, campaign_data in enumerate(campaigns_config, 1):
             try:
-                # Convert daily_budget from cents to integer
+                # Convert daily_budget from dollars to cents
                 if 'daily_budget' in campaign_data:
                     campaign_data['daily_budget'] = int(campaign_data['daily_budget'] * 100)
-                
-                campaign = Campaign(account_id).create(campaign_data)
+
+                campaign = account.create_campaign(params=campaign_data)
                 created_campaigns.append(campaign)
                 print(f"✓ Created campaign {idx}: {campaign_data.get('name')} (ID: {campaign['id']})")
                 time.sleep(0.5)  # Rate limiting

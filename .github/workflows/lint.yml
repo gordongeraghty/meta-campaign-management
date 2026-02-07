@@ -24,10 +24,10 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
     - name: Check formatting with Black
-      run: black --check --diff . || true
-    
+      run: black --check --diff --line-length 127 .
+
     - name: Check import sorting with isort
-      run: isort --check-only --diff . || true
+      run: isort --check-only --diff --profile black .
     
     - name: Lint with flake8
       run: |
@@ -53,4 +53,3 @@ jobs:
     - name: Run tests
       run: |
         if [ -d tests ]; then pytest tests/ -v --cov=. --cov-report=term-missing; fi
-      continue-on-error: true

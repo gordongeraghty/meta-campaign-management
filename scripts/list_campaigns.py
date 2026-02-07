@@ -11,6 +11,7 @@ import os
 import sys
 from dotenv import load_dotenv
 from facebook_business.api import FacebookAdsApi
+from facebook_business.adobjects.adaccount import AdAccount
 from facebook_business.adobjects.campaign import Campaign
 
 load_dotenv()
@@ -18,23 +19,36 @@ load_dotenv()
 def list_campaigns(account_id):
     """
     Fetch and display all campaigns with key metrics.
-    
+
     Args:
-        account_id (str): Meta Business Account ID (format: ACT_xxx)
+        account_id (str): Meta Business Account ID (format: act_xxx)
     """
     try:
         access_token = os.getenv('FACEBOOK_ACCESS_TOKEN')
         if not access_token:
             raise ValueError('FACEBOOK_ACCESS_TOKEN not found in .env')
-        
+
         FacebookAdsApi.init(access_token=access_token)
-        
-        params = {
-            'fields': ['id', 'name', 'status', 'daily_budget', 'lifetime_budget', 'created_time', 'objective'],
-            'limit': 100,
-        }
-        
-        campaigns = Campaign.get_by_ids([account_id], params=params)
+
+        # Normalize account ID to lowercase act_ prefix
+        if not account_id.lower().startswith('act_'):
+            account_id = f'act_{account_id}'
+        elif account_id.startswith('ACT_'):
+            account_id = f'act_{account_id[4:]}'
+
+        account = AdAccount(account_id)
+
+        fields = [
+            Campaign.Field.id,
+            Campaign.Field.name,
+            Campaign.Field.status,
+            Campaign.Field.daily_budget,
+            Campaign.Field.lifetime_budget,
+            Campaign.Field.created_time,
+            Campaign.Field.objective,
+        ]
+
+        campaigns = account.get_campaigns(fields=fields, params={'limit': 100})
         
         if not campaigns:
             print('No campaigns found for this account.')

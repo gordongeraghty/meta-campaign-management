@@ -238,9 +238,10 @@ python scripts/update_budget.py --account-id ACT_1234567890 --adjustment 10 --lo
 **Parameters**:
 
 - `--account-id` (required): Your Meta Business Account ID
-- `--adjustment` (optional): Budget adjustment percentage (default: 10)
+- `--adjustment` (optional): Budget adjustment percentage (default: 10, max: 50)
  - Positive values increase budget
  - Negative values decrease budget
+ - Capped at 50% to prevent runaway changes
 - `--lookback` (optional): Days of performance data to analyse (default: 7)
 
 **Example Commands**:
@@ -288,7 +289,7 @@ Summary: 2 campaigns updated, 0 errors
 - **Current Budget**: Daily budget before adjustment
 - **Spend**: Total spend in the lookback period
 - **Conversions**: Number of conversion actions tracked
-- **CPA**: Cost per acquisition (spend / conversions)
+- **CPA**: Cost per acquisition (spend / conversions), shows "N/A" when no conversions
 - **Updated Budget**: New daily budget after adjustment
 
 ---
@@ -454,9 +455,9 @@ Log campaign data to Google Sheets via Zapier:
 
 ---
 
-## licence
+## License
 
-MIT licence - See licence file
+MIT License - See LICENSE file
 
 ## Author
 
